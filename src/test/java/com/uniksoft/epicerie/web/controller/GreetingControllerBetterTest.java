@@ -9,7 +9,6 @@ import java.util.Map;
 
 import org.junit.Before;
 import org.junit.Test;
-import org.springframework.ui.Model;
 
 import com.uniksoft.epicerie.domain.Color;
 import com.uniksoft.epicerie.domain.Greeting;
@@ -37,7 +36,7 @@ public class GreetingControllerBetterTest extends TestCase {
 		//mock the ColorService
 		fakeColorService = mock(ColorService.class);
 		fakeColorList = new ArrayList<Color>();
-		//inject the GreetingController with a fake GreetingService
+		//inject the GreetingController with a fake GreetingService and a fake ColorService
 		greetingController = new GreetingController(fakeGreetingService, fakeColorService);
 		when(fakeGreetingService.getAllGreetings()).thenReturn(fakeGreetingList);
 		when(fakeGreetingService.getGreetingById(new Integer("1"))).thenReturn(greeting);

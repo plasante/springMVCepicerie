@@ -17,7 +17,7 @@
 				<tr>
 					<td>${greeting.greetingText}</td>
 					<td><a href='<c:url value = "/home/editgreetings.html?id=${greeting.id}"/>'>Edit greeting</a></td>
-					<td><a href='<c:url value = "/home/deletegreeting.html?id=${greeting.id}"/>'>Delete greeting</a></td></td>
+					<td><a href='<c:url value = "/home/deletegreeting.html?id=${greeting.id}"/>'>Delete greeting</a></td>
 				</tr>
 			</c:forEach>
 		</table>
