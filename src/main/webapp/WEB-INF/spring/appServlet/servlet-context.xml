@@ -73,4 +73,6 @@
 			</list>
 		</property>
 	</bean>
+	
+	<bean id="greetingDao" class="com.uniksoft.epicerie.dao.HibernateGreetingDao" />
 </beans>
