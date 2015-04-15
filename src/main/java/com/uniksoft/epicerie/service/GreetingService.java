@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.uniksoft.epicerie.dao.GreetingDao;
 import com.uniksoft.epicerie.dao.HibernateGreetingDao;
 import com.uniksoft.epicerie.domain.Greeting;
 
@@ -16,25 +17,25 @@ import com.uniksoft.epicerie.domain.Greeting;
 public class GreetingService {
 
 	@Resource(name="greetingDao")
-	private HibernateGreetingDao hibernateGreetingDao;
+	private GreetingDao greetingDao;
 	
 	public void updateGreeting(Greeting greeting) {
-		hibernateGreetingDao.updateGreeting(greeting);
+		greetingDao.updateGreeting(greeting);
 	}
 	
 	public List<Greeting> getAllGreetings() {
-		return hibernateGreetingDao.getAllGreetings();
+		return greetingDao.getAllGreetings();
 	}
 	
 	public void addGreeting(Greeting greeting) {
-		hibernateGreetingDao.addGreeting(greeting);
+		greetingDao.addGreeting(greeting);
 	}
 	
 	public Greeting getGreetingById(Integer greetingId) {
-		return hibernateGreetingDao.getGreetingById(greetingId);
+		return greetingDao.getGreetingById(greetingId);
 	}
 	
 	public void deleteGreeting(Greeting greeting) {
-		hibernateGreetingDao.deleteGreeting(greeting);
+		greetingDao.deleteGreeting(greeting);
 	}
 }
