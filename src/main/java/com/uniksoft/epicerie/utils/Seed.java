@@ -1,6 +1,9 @@
 package com.uniksoft.epicerie.utils;
 
+import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 import javax.annotation.PostConstruct;
@@ -10,7 +13,10 @@ import org.springframework.stereotype.Component;
 
 import com.uniksoft.epicerie.domain.Color;
 import com.uniksoft.epicerie.domain.Greeting;
+import com.uniksoft.epicerie.domain.Role;
+import com.uniksoft.epicerie.domain.User;
 import com.uniksoft.epicerie.service.ColorService;
+import com.uniksoft.epicerie.service.GenericEntityService;
 import com.uniksoft.epicerie.service.GreetingService;
 
 @Component
@@ -22,15 +28,18 @@ public class Seed {
 	@Autowired
 	private GreetingService greetingService;
 	
+	@Autowired
+	private GenericEntityService entityService;
+	
 	@PostConstruct
 	public void init() {
 		System.out.println("Seeding the database");
 		populateColors();
 		populateGreetings();
+		populateUsersRoles();
 	}
 	
 	private void populateColors() {
-		System.out.println("Populating colors table");
 		Color indianRed = new Color("Indian Red", "#F75D59");
 		colorService.addColor(indianRed);
 		colorService.addColor(new Color("Red", "#FF0000"));
@@ -42,7 +51,6 @@ public class Seed {
 	}
 	
 	private void populateGreetings() {
-		System.out.println("Populating greetings table");
 		Greeting greeting1 = new Greeting("Greeting 1");
 		Color color = colorService.getColorById(1);
 		Set<Color> set = new HashSet<Color>();
@@ -55,5 +63,28 @@ public class Seed {
 		greetingService.updateGreeting(greeting1);
 		greetingService.addGreeting(new Greeting("Greeting 2"));
 		greetingService.addGreeting(new Greeting("Greeting 3"));
+	}
+	
+	private void populateUsersRoles() {
+		User user1 = new User("firstName","lastName","username","email","password",new Date(),"ssn");
+		Role role1 = new Role("user");
+		entityService.addEntity(role1);
+		List<Role> roles = new ArrayList<Role>();
+		roles.add(role1);
+		user1.setRoles(roles);
+		entityService.addEntity(user1);
+		
+		User user2 = new User("Pierre","Lasante","plasante","plasante@email.com","123456",new Date(),"ssn");
+		entityService.addEntity(user2);
+		User user3 = new User("Carole","Spenard","cspenard","cspenard@email.com","123456",new Date(),"ssn");
+		entityService.addEntity(user3);
+		User user4 = new User("Judith","Spenard","jspenard","jspenard@email.com","123456",new Date(),"ssn");
+		entityService.addEntity(user4);
+		
+		Role role2 = new Role("admin");
+		entityService.addEntity(role2);
+		roles.add(role2);
+		user2.setRoles(roles);
+		entityService.updateEntity(user2);
 	}
 }
